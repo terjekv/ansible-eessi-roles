@@ -9,6 +9,8 @@ This repository contains ansible roles for setting up a computer as a part of th
 
 # Using these roles
 
+Fetch by doing `ansible-galaxy install -r requirements.yml`. Add `--force` to guarantee updating the requirements.
+
 ## Stratum0
 
 #### **`requirements.yaml`**
