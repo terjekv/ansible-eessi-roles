@@ -15,12 +15,12 @@ This repository contains ansible roles for setting up a computer as a part of th
 ``` yaml
 roles:
   - name: eessi.stratum0
-    src: https://github.com/EESSI/ansible-eessi-nodes
+    src: https://github.com/EESSI/ansible-eessi-roles
     version: 1.0.0
 ```
 #### **`main.yaml`**
 ``` yaml
-- hosts: 
+- hosts: eessi_stratum0
   roles:
   - eessi.stratum0
 
@@ -35,12 +35,12 @@ roles:
 ``` yaml
 roles:
   - name: eessi.stratum1
-    src: https://github.com/EESSI/ansible-eessi-nodes
+    src: https://github.com/EESSI/ansible-eessi-roles
     version: 1.0.0
 ```
 #### **`main.yaml`**
 ``` yaml
-- hosts: 
+- hosts: eessi_stratum1
   roles:
   - eessi.stratum1
 
