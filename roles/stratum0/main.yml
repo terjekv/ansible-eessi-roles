@@ -1,0 +1,2 @@
+---
+- include: ../shared/gather_os_data.yml

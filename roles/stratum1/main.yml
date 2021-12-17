@@ -1,0 +1,3 @@
+---
+- include: ../shared/gather_os_data.yml
+- include: ../shared/cvmfs.yml
