@@ -11,16 +11,20 @@ This repository contains ansible roles for setting up a computer as a part of th
 
 Fetch by doing `ansible-galaxy install -r requirements.yml`. Add `--force` to guarantee updating the requirements. This is useful if your version is a branch like `develop`. 
 
-## Stratum0
-
+For all host types, the following requirements file is currently recommended:
 #### **`requirements.yaml`**
 ``` yaml
 roles:
   - name: eessi.roles
     src: https://github.com/EESSI/ansible-eessi-roles
-    version: 1.0.0
+    version: develop
 ```
-#### **`main.yaml`**
+
+Then create a playbook for your host type, following one of the examples below. Create (or reuse) a suitable inventory file. Then run as `ansible-playbook playbook.yaml -b -i inventory`.
+
+## Stratum0
+
+#### **`playbook.yaml`**
 ``` yaml
 - hosts: eessi_stratum0
   roles:
@@ -32,15 +36,7 @@ roles:
 ```
 
 ## Stratum1
-
-#### **`requirements.yaml`**
-``` yaml
-roles:
-  - name: eessi.roles
-    src: https://github.com/EESSI/ansible-eessi-roles
-    version: 1.0.0
-```
-#### **`main.yaml`**
+#### **`playbook.yaml`**
 ``` yaml
 - hosts: eessi_stratum1
   roles:
@@ -78,15 +74,7 @@ roles:
 ```
 
 ## Proxy
-
-#### **`requirements.yaml`**
-``` yaml
-roles:
-  - name: eessi.roles
-    src: https://github.com/EESSI/ansible-eessi-roles
-    version: 1.0.0
-```
-#### **`main.yaml`**
+#### **`playbook.yaml`**
 ``` yaml
 - hosts: eessi_proxy
   roles:
@@ -105,14 +93,7 @@ roles:
 
 ## Clients
 
-#### **`requirements.yaml`**
-``` yaml
-roles:
-  - name: eessi.roles
-    src: https://github.com/EESSI/ansible-eessi-roles
-    version: 1.0.0
-```
-#### **`main.yaml`**
+#### **`playbook.yaml`**
 ``` yaml
 - hosts: eessi_client
   roles:
