@@ -1,6 +1,23 @@
 ---
 # Defaults for all EESSI node ansible roles
 
+# Enable monitoring on nodes, defaults to true.
+# This will install grafana, prometheus, node_exporter, and cvmfs_exporter
+# on the monitored node.
+eessi_monitoring: true
+
+# Set the node as a public node. If the node is set as public the prometheus
+# instance will allow monitoring.eessi-infra.org to connect to scrape data.
+eessi_public: false
+
+# All services bind to localhost, unless eessi_public[nodetype] is set to
+# public, in that case grafana and prometheus binds to "*". 
+eessi_service_ports:
+  grafana: 3000
+  prometheus: 9090
+  node_exporter: 9100
+  cvmfs_exporter: 9101
+
 # Automatically configure EESSI CVMFS repos.
 eessi_cvmfs_repos_enabled: true
 

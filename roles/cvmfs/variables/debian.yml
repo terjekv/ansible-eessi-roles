@@ -1,4 +1,6 @@
 ---
+# The package `cvmfs` is not strictly required for a stratum1,
+# but monitoring requires it so we install it anyway.
 cvmfs_packages:
   stratum0:
     - apache2

@@ -18,14 +18,43 @@
     - "{{ eessi_cvmfs_include_path }}/{{ ansible_distribution | lower }}.yml"
     - "{{ eessi_cvmfs_include_path }}/{{ ansible_os_family | lower }}.yml"
 
+- name: Gather monitoring variables
+  include_vars: "{{ eessi_cvmfs_include_path }}/monitoring.yml"
+
 - debug:
-    msg: "CVMFS repositories: {{ galaxy_cvmfs_repositories }}"
+    msg: "CVMFS repositories: {{ galaxy_cvmfs_repositories }}"
+
+- debug:
+    msg: "Monitoring: {{ eessi_monitoring }}. Public: {{ eessi_public }}. Grafana: {{ grafana_address }}"
+
 
 - name: Install EPEL if required
   include_role:
     name: geerlingguy.repo-epel
   when: ansible_os_family == "RedHat" 
 
+- block:
+  - name: Installing prometheus
+    include_role:
+      name: "cloudalchemy.prometheus"
+  - name: Installing node_exporter
+    include_role:
+      name: "cloudalchemy.node_exporter"
+  - name: Installing cvmfs_exporter
+    include_role:
+      name: "eessi.cvmfs_exporter"
+  - name: Installing grafana
+    include_role:
+      name: "cloudalchemy.grafana"
+  when:
+    eessi_monitoring is true
+
 - name: Installing CVMFS
   include_role:
     name: galaxyproject.cvmfs
+
+- name: Print grafana login password if monitoring is enabled
+  debug:
+    msg: "Grafana login password: {{ grafana_security.admin_password }}"
+  when:
+    eessi_monitoring is true

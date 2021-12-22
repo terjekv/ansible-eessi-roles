@@ -1,14 +1,3 @@
 ---
 cvmfs_squid_conf_src: "{{ local_stratum1_cvmfs_squid_conf_src | default('squid.conf.j2') }}"
 cvmfs_role: "stratum1"
-
-local_cvmfs_repositories:
-  - repository: ci.eessi-hpc.org
-    stratum0: rug-nl.stratum0.cvmfs.eessi-infra.org
-    owner: "{{ cvmfs_repo_owner | default('root') }}"
-    key_dir: /etc/cvmfs/keys/eessi-hpc.org
-    server_options:
-      - CVMFS_AUTO_GC=false
-      - CVMFS_GARBAGE_COLLECTION=true
-    client_options: []
-    use_for_ci: yes
