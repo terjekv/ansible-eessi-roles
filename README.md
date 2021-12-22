@@ -56,13 +56,17 @@ roles:
     # Everything after this is optional. The defaults should provide a working stratum1
     # with local monitoring enabled.
 
+    # Set the node as a public node. If the node is set as public the prometheus
+    # instance will allow monitoring.eessi-infra.org to connect to scrape data.
+    eessi_public: false
+
     # Enable monitoring on nodes, defaults to true.
     # This will install grafana, prometheus, node_exporter, and cvmfs_exporter
     # on the monitored node.
     eessi_monitoring: true
 
-    # All services bind to localhost, unless eessi_public[nodetype] is set to
-    # public, in that case grafana and prometheus binds to "*". 
+    # All services bind to localhost, unless eessi_public is set to
+    # true, in that case grafana and prometheus binds to "*". 
     eessi_service_ports:
       grafana: 3000
       prometheus: 9090
