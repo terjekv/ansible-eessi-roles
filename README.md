@@ -9,14 +9,14 @@ This repository contains ansible roles for setting up a computer as a part of th
 
 # Using these roles
 
-Fetch by doing `ansible-galaxy install -r requirements.yml`. Add `--force` to guarantee updating the requirements.
+Fetch by doing `ansible-galaxy install -r requirements.yml`. Add `--force` to guarantee updating the requirements. This is useful if your version is a branch like `develop`. 
 
 ## Stratum0
 
 #### **`requirements.yaml`**
 ``` yaml
 roles:
-  - name: eessi.stratum0
+  - name: eessi.roles
     src: https://github.com/EESSI/ansible-eessi-roles
     version: 1.0.0
 ```
@@ -36,15 +36,15 @@ roles:
 #### **`requirements.yaml`**
 ``` yaml
 roles:
-  - name: eessi.stratum1
+  - name: eessi.roles
     src: https://github.com/EESSI/ansible-eessi-roles
     version: 1.0.0
 ```
 #### **`main.yaml`**
 ``` yaml
-- hosts: eessi_stratum1
+- hosts: eessi_stratum0
   roles:
-  - eessi.stratum1
+  - eessi.stratum0
 
   vars:
     # The license key for the Geo API:
@@ -53,6 +53,25 @@ roles:
     # https://github.com/EESSI/filesystem-layer/issues/2
     cvmfs_geo_license_key: INSERT_YOUR_KEY
 
+    # Everything after this is optional. The defaults should provide a working stratum1
+    # with local monitoring enabled.
+
+    # Enable monitoring on nodes, defaults to true.
+    # This will install grafana, prometheus, node_exporter, and cvmfs_exporter
+    # on the monitored node.
+    eessi_monitoring: true
+
+    # Set the node as a public node. If the node is set as public the prometheus
+    # instance will allow monitoring.eessi-infra.org to connect to scrape data.
+    eessi_public: false
+
+    # All services bind to localhost, unless eessi_public[nodetype] is set to
+    # public, in that case grafana and prometheus binds to "*". 
+    eessi_service_ports:
+      grafana: 3000
+      prometheus: 9090
+      node_exporter: 9100
+      cvmfs_exporter: 9101
 
     # List of clients allowed to access your local proxies.
     # Add individual IPs and/or use CIDR notation.
@@ -60,22 +79,21 @@ roles:
       - 192.168.0.0/12
       - 10.0.0.15
 
-
     # List of all http proxies that should be configured for the clients.
     # Remove or comment the line if you do not want to use a proxy; in this
     # case it will be set to "DIRECT" in the client configuration.
     local_cvmfs_http_proxies:
       - your-proxy-1:3128
       - your-proxy-2:3128
+
     # The following one-liner can be used to automatically add all the hosts
     # defined in the cvmfslocalproxies group in your hosts file
     # to local_cvmfs_http_proxies, using port number 3128.
-    # local_cvmfs_http_proxies: "{{ groups.cvmfslocalproxies | map('regex_replace', '^(.*)$', '\\1:3128') | list }}"
-
+    local_cvmfs_http_proxies: "{{ groups.cvmfslocalproxies | map('regex_replace', '^(.*)$', '\\1:3128') | list }}"
 
     # Uncomment if you want to use your own Squid configuration template for the local proxies
-    # local_proxies_cvmfs_squid_conf_src: "/path/to/your/template"
+    local_proxies_cvmfs_squid_conf_src: "/path/to/your/template"
 
     # Uncomment if you want to use your own Squid configuration template for the Stratum 1
-    # local_stratum1_cvmfs_squid_conf_src: : "/path/to/your/template"
+    local_stratum1_cvmfs_squid_conf_src: : "/path/to/your/template"
 ```
