@@ -70,7 +70,7 @@ roles:
       cvmfs_exporter: 9101
 
     # If you want to use your own Squid configuration template for the Stratum 1
-    local_stratum1_cvmfs_squid_conf_src: : "/path/to/your/template"
+    local_stratum1_cvmfs_squid_conf_src: "/path/to/your/template"
 ```
 
 ## Proxy
