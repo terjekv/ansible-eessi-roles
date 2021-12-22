@@ -61,10 +61,6 @@ roles:
     # on the monitored node.
     eessi_monitoring: true
 
-    # Set the node as a public node. If the node is set as public the prometheus
-    # instance will allow monitoring.eessi-infra.org to connect to scrape data.
-    eessi_public: false
-
     # All services bind to localhost, unless eessi_public[nodetype] is set to
     # public, in that case grafana and prometheus binds to "*". 
     eessi_service_ports:
@@ -73,27 +69,56 @@ roles:
       node_exporter: 9100
       cvmfs_exporter: 9101
 
+    # If you want to use your own Squid configuration template for the Stratum 1
+    local_stratum1_cvmfs_squid_conf_src: : "/path/to/your/template"
+```
+
+## Proxy
+
+#### **`requirements.yaml`**
+``` yaml
+roles:
+  - name: eessi.roles
+    src: https://github.com/EESSI/ansible-eessi-roles
+    version: 1.0.0
+```
+#### **`main.yaml`**
+``` yaml
+- hosts: eessi_proxy
+  roles:
+  - eessi.proxy
+
+  vars:
     # List of clients allowed to access your local proxies.
     # Add individual IPs and/or use CIDR notation.
     local_cvmfs_http_proxies_allowed_clients:
       - 192.168.0.0/12
       - 10.0.0.15
 
+    # If you want to use your own Squid configuration template for the local proxies
+    local_proxies_cvmfs_squid_conf_src: "/path/to/your/template"
+```
+
+## Clients
+
+#### **`requirements.yaml`**
+``` yaml
+roles:
+  - name: eessi.roles
+    src: https://github.com/EESSI/ansible-eessi-roles
+    version: 1.0.0
+```
+#### **`main.yaml`**
+``` yaml
+- hosts: eessi_client
+  roles:
+  - eessi.client
+
+  vars:
     # List of all http proxies that should be configured for the clients.
     # Remove or comment the line if you do not want to use a proxy; in this
     # case it will be set to "DIRECT" in the client configuration.
     local_cvmfs_http_proxies:
       - your-proxy-1:3128
       - your-proxy-2:3128
-
-    # The following one-liner can be used to automatically add all the hosts
-    # defined in the cvmfslocalproxies group in your hosts file
-    # to local_cvmfs_http_proxies, using port number 3128.
-    local_cvmfs_http_proxies: "{{ groups.cvmfslocalproxies | map('regex_replace', '^(.*)$', '\\1:3128') | list }}"
-
-    # Uncomment if you want to use your own Squid configuration template for the local proxies
-    local_proxies_cvmfs_squid_conf_src: "/path/to/your/template"
-
-    # Uncomment if you want to use your own Squid configuration template for the Stratum 1
-    local_stratum1_cvmfs_squid_conf_src: : "/path/to/your/template"
 ```
