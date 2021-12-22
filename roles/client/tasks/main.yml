@@ -1,0 +1,4 @@
+---
+- name: "EESSI : client"
+  roles:
+    - shared/cvmfs

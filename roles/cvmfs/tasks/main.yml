@@ -1,0 +1,31 @@
+---
+- debug:
+    msg: "{{ role_path }}"
+
+- name: Set include path
+  set_fact:
+    eessi_cvmfs_include_path: "{{ role_path }}/variables"
+
+- name: Gather core EESSI variables
+  include_vars: "{{ eessi_cvmfs_include_path }}/main.yml"
+
+- name: Gather variables for each operating system
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ eessi_cvmfs_include_path }}/{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+    - "{{ eessi_cvmfs_include_path }}/{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "{{ eessi_cvmfs_include_path }}/{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "{{ eessi_cvmfs_include_path }}/{{ ansible_distribution | lower }}.yml"
+    - "{{ eessi_cvmfs_include_path }}/{{ ansible_os_family | lower }}.yml"
+
+- debug:
+    msg: "CVMFS repositories: {{ galaxy_cvmfs_repositories }}"
+
+- name: Install EPEL if required
+  include_role:
+    name: geerlingguy.repo-epel
+  when: ansible_os_family == "RedHat" 
+
+- name: Installing CVMFS
+  include_role:
+    name: galaxyproject.cvmfs

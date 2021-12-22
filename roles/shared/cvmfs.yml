@@ -1,5 +1,0 @@
----
-- include: ../shared/gather_os_data.yml
-
-roles: 
-  - galaxyproject.cvmfs

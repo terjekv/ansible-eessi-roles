@@ -1,0 +1,4 @@
+---
+- name: "EESSI : stratum 0"
+  roles:
+    - shared/cvmfs
