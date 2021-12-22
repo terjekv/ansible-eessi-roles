@@ -25,6 +25,7 @@ Now fetch dependencies by doing `ansible-galaxy install -r requirements.yml`. Ad
 
 Then create a playbook for your host type, following one of the examples below. Create (or reuse) a suitable inventory file. Then run as `ansible-playbook playbook.yaml -b -i inventory`.
 
+# Playbook examples
 ## Stratum0
 
 #### **`playbook.yaml`**
