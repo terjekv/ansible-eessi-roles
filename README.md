@@ -9,9 +9,10 @@ This repository contains ansible roles for setting up a computer as a part of th
 
 # Using these roles
 
-Fetch by doing `ansible-galaxy install -r requirements.yml`. Add `--force` to guarantee updating the requirements. This is useful if your version is a branch like `develop`. 
+# Requirements / dependencies
 
-For all host types, the following requirements file is currently recommended:
+First create or update a requirements file as such:
+
 #### **`requirements.yaml`**
 ``` yaml
 roles:
@@ -19,6 +20,8 @@ roles:
     src: https://github.com/EESSI/ansible-eessi-roles
     version: develop
 ```
+
+Now fetch dependencies by doing `ansible-galaxy install -r requirements.yml`. Add `--force` to guarantee updating the requirements. This is useful if your version is a branch like `develop`. 
 
 Then create a playbook for your host type, following one of the examples below. Create (or reuse) a suitable inventory file. Then run as `ansible-playbook playbook.yaml -b -i inventory`.
 
