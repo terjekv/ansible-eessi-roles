@@ -22,7 +22,7 @@ prometheus_scrape_configs:
 
 node_exporter_web_listen_address: "127.0.0.1:{{ eessi_service_ports['node_exporter'] }}"
 
-grafana_random_password: lookup('community.general.random_string')
+grafana_random_password: "{{ lookup('community.general.random_string', length=12, special='no') }}"
 grafana_address: "{{ '*' if eessi_public is true else '127.0.0.1' }}"
 grafana_port: "{{ eessi_service_ports['grafana'] }}"
 grafana_security:
