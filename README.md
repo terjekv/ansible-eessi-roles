@@ -42,9 +42,9 @@ roles:
 ```
 #### **`main.yaml`**
 ``` yaml
-- hosts: eessi_stratum0
+- hosts: eessi_stratum1
   roles:
-  - eessi.stratum0
+  - eessi.stratum1
 
   vars:
     # The license key for the Geo API:
