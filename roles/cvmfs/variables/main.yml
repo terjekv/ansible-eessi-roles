@@ -10,7 +10,7 @@ eessi_monitoring: true
 # instance will allow monitoring.eessi-infra.org to connect to scrape data.
 eessi_public: false
 
-# All services bind to localhost, unless eessi_public[nodetype] is set to
+# All services bind to localhost, unless eessi_public is set to
 # public, in that case grafana and prometheus binds to "*". 
 eessi_service_ports:
   grafana: 3000
