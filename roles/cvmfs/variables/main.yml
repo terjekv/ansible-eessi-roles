@@ -11,7 +11,7 @@ eessi_monitoring: true
 eessi_public: false
 
 # All services bind to localhost, unless eessi_public is set to
-# public, in that case grafana and prometheus binds to "*". 
+# true, in that case grafana and prometheus binds to "*". 
 eessi_service_ports:
   grafana: 3000
   prometheus: 9090
