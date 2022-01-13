@@ -104,9 +104,9 @@ eessi_cvmfs_repositories:
     use_for_ci: yes
 
 # Override all the Galaxy defaults by our EESSI defaults.
-# This is required, beucase the galaxy_* variables are used inside the Ansible tasks.
+# This is required, becase the galaxy_* variables are used inside the Ansible tasks.
 galaxy_cvmfs_config_repo: "{{ local_cvmfs_config_repo | default(eessi_cvmfs_config_repo) }}"
 galaxy_cvmfs_keys: "{{ local_cvmfs_keys | default(eessi_cvmfs_keys) }}"
 galaxy_cvmfs_server_urls: "{{ local_cvmfs_server_urls | default(eessi_cvmfs_server_urls) }}"
 galaxy_cvmfs_repositories: "{{ local_cvmfs_repositories | default(eessi_cvmfs_repositories) }}"
-galaxy_cvmfs_repos_enabled: "{{ local_cvmfs_repos_enabled | default(eessi_cvmfs_repos_enabled) }}"
+galaxy_cvmfs_repos_enabled: "{{ local_cvmfs_repos_enabled | default(eessi_cvmfs_repos_enabled) }}"
