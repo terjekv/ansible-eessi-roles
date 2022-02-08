@@ -1,4 +1,7 @@
 ---
-- name: "EESSI : proxy"
-  roles:
-    - shared/cvmfs
+- name: Set include path for proxy
+  set_fact:
+    eessi_proxy_include_path: "{{ role_path }}/variables"
+
+- include_role:
+    - eessi.roles/shared/cvmfs

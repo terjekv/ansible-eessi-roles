@@ -1,4 +1,7 @@
 ---
-- name: "EESSI : client"
-  roles:
-    - shared/cvmfs
+- name: Set include path for clients
+  set_fact:
+    eessi_clients_include_path: "{{ role_path }}/variables"
+
+- include_role:
+    - eessi.roles/shared/cvmfs
