@@ -3,5 +3,5 @@
   set_fact:
     eessi_proxy_include_path: "{{ role_path }}/variables"
 
-- include_role:
-    - eessi.roles/shared/cvmfs
+- include_role: 
+    name: eessi.roles/roles/cvmfs
