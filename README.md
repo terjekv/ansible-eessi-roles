@@ -11,6 +11,10 @@ This repository contains ansible roles for setting up a computer as a part of th
 
 # Requirements / dependencies
 
+These roles have the following external dependencies:
+  - ansible v2.12 or higher
+  - jinja v.3.0.3 or higher
+
 First create or update a requirements file as such:
 
 #### **`requirements.yaml`**
