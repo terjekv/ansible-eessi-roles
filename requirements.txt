@@ -1,7 +1,5 @@
 ---
 roles:
-  - name: cloudalchemy.blackbox-exporter
-    version: 1.0.0
   - name: cloudalchemy.prometheus
     version: 4.0.0
   - name: cloudalchemy.grafana
