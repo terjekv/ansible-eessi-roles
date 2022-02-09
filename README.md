@@ -115,3 +115,9 @@ Then create a playbook for your host type, following one of the examples below. 
       - your-proxy-1:3128
       - your-proxy-2:3128
 ```
+
+# Running the playbooks
+
+`ansible-playbook -i inventory playbook.yaml` 
+
+Avoid using `-b`, the roles will sudo if required.
