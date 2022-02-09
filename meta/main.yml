@@ -3,7 +3,7 @@ galaxy_info:
   description: EESSI CVMFS roles for stratum0s, stratum1s, clients, and proxies.
   license: GPL
   company: EESSI
-  min_ansible_version: 2.7
+  min_ansible_version: 2.12
   platforms:
     - name: Ubuntu
       versions:
@@ -29,3 +29,7 @@ galaxy_info:
 dependencies:
   - galaxyproject.cvmfs
   - geerlingguy.repo-epel
+  - cloudalchemy.blackbox-exporter
+  - cloudalchemy.prometheus
+  - cloudalchemy.grafana
+  - cloudalchemy.node_exporter
