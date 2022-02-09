@@ -29,7 +29,6 @@ galaxy_info:
 dependencies:
   - galaxyproject.cvmfs
   - geerlingguy.repo-epel
-  - cloudalchemy.blackbox-exporter
   - cloudalchemy.prometheus
   - cloudalchemy.grafana
   - cloudalchemy.node_exporter

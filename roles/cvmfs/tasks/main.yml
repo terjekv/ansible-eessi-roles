@@ -40,9 +40,9 @@
   - name: Installing node_exporter
     include_role:
       name: "cloudalchemy.node_exporter"
-  - name: Installing cvmfs_exporter
-    include_role:
-      name: "eessi.cvmfs_exporter"
+#  - name: Installing cvmfs_exporter
+#    include_role:
+#      name: "eessi.cvmfs_exporter"
   - name: Installing grafana
     include_role:
       name: "cloudalchemy.grafana"
